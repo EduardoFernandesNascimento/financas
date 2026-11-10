@@ -1,0 +1,40 @@
+# EV-010 · e2e
+# comando: npm --prefix gastos run e2e -- --remover
+# shell: bash
+# início: 2026-11-10T23:17:23.292Z
+# fim: 2026-11-10T23:17:29.050Z (5.8 s)
+# resultado: regex (\d+ ok, \d+ falhas)
+# código de saída: 0
+
+> gastos@0.0.0 e2e
+> node e2e/conferir.mjs --remover
+
+ok     [REQ-019] cartão do pedido 1 (Mercado Central) mostra R$ 54,40
+ok     [REQ-016] cartão mostra loja, data, número de itens e total
+ok     [REQ-022] resumo do topo coerente com a lista (total, quantidade, maior)
+ok     [REQ-031] campos vazios mostram todos os pedidos do servidor
+ok     [REQ-028] mínimo 100 mostra só pedidos >= R$ 100
+ok     [REQ-032] resumo muda junto com o filtro (total, quantidade e maior dos filtrados)
+ok     [REQ-026][REQ-029] mínimo vazio e máximo 50 aplicam só o máximo
+ok     [REQ-030] mínimo e máximo juntos
+ok     [REQ-027][REQ-053] faixa sem resultado mostra a mensagem e Limpar volta tudo
+ok     [REQ-065] ordenar por valor (maior e menor primeiro) e voltar à ordem original
+ok     [REQ-066][REQ-067] total por loja e gasto por data agrupam os cartões
+ok     [REQ-034][REQ-038] clicar no cartão abre /pedido/1 sem recarregar
+ok     [REQ-043] detalhe de pedido que está na lista lê do Context, sem GET /pedidos/1
+ok     [REQ-036] detalhe mostra itens com subtotal e total R$ 54,40
+ok     [REQ-039] F5 no detalhe continua mostrando o pedido
+ok     [REQ-037][REQ-040] Voltar leva a /
+ok     [REQ-041] /pedido/999 faz GET /pedidos/999 com 404 e mostra "Pedido não encontrado" com link de volta
+ok     [REQ-042] /xyz mostra "Página não encontrada"
+ok     [REQ-045][REQ-052] servidor recusando o DELETE: mensagem na tela e item continua
+ok     [REQ-054] rede lenta mostra "Carregando…" e depois a lista
+ok     [REQ-055][REQ-057] servidor fora: mensagem de erro e Tentar de novo traz a lista
+ok     [REQ-056] 404 e 500 do servidor: a mensagem cita o status
+ok     [REQ-059] lista vazia mostra "Nenhum pedido neste mês"
+ok     [REQ-029] filtro compara em centavos: 1,10 × 3 aparece com máximo 3,30
+ok     [REQ-060][REQ-061][REQ-062] 375 px: sem rolagem lateral, cartões e filtro empilhados
+ok     [REQ-060][REQ-063] 375 px no detalhe: sem rolagem e Remover com 44 px ou mais
+ok     [REQ-048][REQ-049][REQ-050] remover item atualiza totais, persiste no F5 e pedido vazio some
+ok     [REQ-064] console sem erro nem aviso de key
+28 ok, 0 falhas
