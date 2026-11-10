@@ -1,0 +1,18 @@
+
+# Pasta local dos agentes (PROTOCOLO §7) — nunca vai para o remoto
+/.opencode/
+
+# Pasta local dos agentes (PROTOCOLO §7) — nunca vai para o remoto
+/.claude/
+
+# Dependências e build
+node_modules/
+dist/
+
+# Segredos
+.env
+.env.*
+!.env.example
+
+# Servidor entregue pela professora (fica fora do git)
+/servidor-gastos/

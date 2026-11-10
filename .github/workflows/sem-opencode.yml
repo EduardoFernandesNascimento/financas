@@ -1,0 +1,25 @@
+# PROTOCOLO §7 · .opencode e .claude nunca entram no repositório do projeto (MEM-005).
+# Instalado por instalar.sh. Para BLOQUEAR o merge, marque o check "sem-opencode" como obrigatório
+# na proteção da branch main (repositório público ou plano pago do GitHub); sem isso, ele só indica.
+name: sem-opencode
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  sem-opencode:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Verificar .opencode e .claude fora do repositório
+        run: bash .github/scripts/sem-opencode.sh "$HEAD_SHA" "$BASE_SHA"
+        env:
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
