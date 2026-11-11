@@ -1,24 +1,96 @@
-/* Mobile-first: o estilo base é o do celular; media queries só com min-width. */
+/* Finanças · tema "fintech claro".
+   Mobile-first: o estilo base é o do celular; media queries de largura só com min-width.
+   Todas as cores são tokens em :root; o modo escuro troca só os tokens (prefers-color-scheme).
+   Pares de texto conferidos por cálculo de contraste (WCAG): ver notas-frontend.md da F-002. */
 :root {
-  --fundo: #f5f6f8;
-  --superficie: #ffffff;
-  --texto: #1b1d21;
-  --texto-suave: #4a5260;
-  --borda: #c9ced6;
-  --destaque: #0b5cad;
-  --destaque-escuro: #084a8c;
-  --perigo: #b3261e;
-  --perigo-escuro: #8c1d17;
-  --erro-fundo: #fdecea;
-  --raio: 0.75rem;
-  --espaco: clamp(0.75rem, 0.6rem + 0.75vw, 1.25rem);
+  color-scheme: light dark;
 
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  /* superfícies e texto */
+  --fundo: #f3f6f4;
+  --superficie: #ffffff;
+  --texto: #14211c;
+  --texto-suave: #4a5b54;
+
+  /* fundo temático: grade de extrato, gráfico subindo e moedas, em SVG próprio (data URI).
+     Toda a tinta fica num <g opacity> único: o pior pixel do padrão é a cor da tinta nessa opacidade
+     sobre --fundo (as linhas que se cruzam não somam opacidade dentro do grupo). */
+  --padrao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cg opacity='0.12' fill='none' stroke='%23047857' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke-opacity='0.45' d='M0 .5H240M0 60.5H240M0 120.5H240M0 180.5H240M.5 0V240M60.5 0V240M120.5 0V240M180.5 0V240'/%3E%3Cpath stroke-width='2.5' d='M12 204L52 170L86 182L124 134L158 148L198 94L226 72M212 68l14 4-4 14'/%3E%3Ccircle cx='62' cy='58' r='15' stroke-width='2'/%3E%3Ccircle cx='62' cy='58' r='9'/%3E%3Ccircle cx='184' cy='196' r='11' stroke-width='2'/%3E%3Cpath d='M184 190v12'/%3E%3C/g%3E%3C/svg%3E");
+  --borda: #d6dfda;
+  --borda-forte: #4a5b54;
+
+  /* verde-esmeralda: cor principal */
+  --primaria: #047857;
+  --primaria-forte: #065f46;
+  --primaria-suave: #e3f3ec;
+  --sobre-primaria: #ffffff;
+
+  /* âmbar: alerta e valor alto */
+  --alerta: #d97706;
+  --alerta-texto: #8a4600;
+  --alerta-fundo: #fff1d6;
+
+  /* vermelho: erro e ação destrutiva */
+  --perigo: #b42318;
+  --perigo-forte: #912018;
+  --sobre-perigo: #ffffff;
+  --erro-fundo: #fdeceb;
+
+  /* cabeçalho */
+  --topo-fundo: #065f46;
+  --topo-texto: #ffffff;
+  --topo-suave: #d1fae5;
+
+  --foco: #047857;
+  --sombra: 0 1px 2px rgb(16 40 30 / 0.06), 0 4px 12px rgb(16 40 30 / 0.06);
+  --sombra-alta: 0 2px 4px rgb(16 40 30 / 0.08), 0 10px 24px rgb(16 40 30 / 0.12);
+
+  --raio: 0.875rem;
+  --raio-pequeno: 0.5rem;
+  --espaco: clamp(0.75rem, 0.6rem + 0.75vw, 1.25rem);
+  --alvo: 2.75rem; /* 44 px: alvo de toque das ações principais */
+
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
   line-height: 1.5;
   color: var(--texto);
   background: var(--fundo);
   -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fundo: #0d1512;
+    --superficie: #16211d;
+    --texto: #e6efeb;
+    --texto-suave: #a7b7b0;
+
+    --padrao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cg opacity='0.1' fill='none' stroke='%236ee7b7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke-opacity='0.45' d='M0 .5H240M0 60.5H240M0 120.5H240M0 180.5H240M.5 0V240M60.5 0V240M120.5 0V240M180.5 0V240'/%3E%3Cpath stroke-width='2.5' d='M12 204L52 170L86 182L124 134L158 148L198 94L226 72M212 68l14 4-4 14'/%3E%3Ccircle cx='62' cy='58' r='15' stroke-width='2'/%3E%3Ccircle cx='62' cy='58' r='9'/%3E%3Ccircle cx='184' cy='196' r='11' stroke-width='2'/%3E%3Cpath d='M184 190v12'/%3E%3C/g%3E%3C/svg%3E");
+    --borda: #2b3a34;
+    --borda-forte: #a7b7b0;
+
+    --primaria: #34d399;
+    --primaria-forte: #6ee7b7;
+    --primaria-suave: #123a2d;
+    --sobre-primaria: #04241a;
+
+    --alerta: #f59e0b;
+    --alerta-texto: #fcd34d;
+    --alerta-fundo: #3b2a07;
+
+    --perigo: #f87171;
+    --perigo-forte: #fca5a5;
+    --sobre-perigo: #2b0909;
+    --erro-fundo: #3a1616;
+
+    --topo-fundo: #10291f;
+    --topo-texto: #e6efeb;
+    --topo-suave: #a7f3d0;
+
+    --foco: #6ee7b7;
+    --sombra: 0 1px 2px rgb(0 0 0 / 0.4), 0 4px 12px rgb(0 0 0 / 0.25);
+    --sombra-alta: 0 2px 4px rgb(0 0 0 / 0.45), 0 10px 24px rgb(0 0 0 / 0.35);
+  }
 }
 
 *,
@@ -27,9 +99,16 @@
   box-sizing: border-box;
 }
 
+/* fundo e cor explícitos no body nos dois temas, com o padrão temático por cima da cor.
+   Sem background-attachment: fixed (repinta a cada rolagem no celular). */
 body {
   margin: 0;
   min-height: 100dvh;
+  color: var(--texto);
+  background-color: var(--fundo);
+  background-image: var(--padrao);
+  background-repeat: repeat;
+  background-size: 15rem 15rem;
   overflow-wrap: anywhere;
 }
 
@@ -46,10 +125,12 @@ dd {
 h1 {
   font-size: clamp(1.4rem, 1.2rem + 1vw, 2rem);
   line-height: 1.2;
+  letter-spacing: -0.01em;
 }
 
 h2 {
   font-size: clamp(1.1rem, 1rem + 0.5vw, 1.35rem);
+  line-height: 1.3;
 }
 
 ul {
@@ -63,42 +144,148 @@ button {
   font: inherit;
 }
 
+svg {
+  flex-shrink: 0;
+}
+
+/* foco visível em links, botões e campos */
 :focus-visible {
-  outline: 3px solid var(--destaque);
+  outline: 3px solid var(--foco);
   outline-offset: 2px;
 }
 
+/* números financeiros: tabulares e alinhados à direita */
+.valor,
+.cartao-total,
+.resumo-item dd,
+.item-conta,
+.total-pedido,
+.proporcao-texto {
+  font-variant-numeric: tabular-nums;
+}
+
+.valor {
+  font-weight: 600;
+  white-space: nowrap;
+  text-align: end;
+}
+
+/* ---------- cabeçalho ---------- */
+.topo {
+  color: var(--topo-texto);
+  background: var(--topo-fundo);
+}
+
+.topo-conteudo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  width: 100%;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding: 0.75rem var(--espaco);
+}
+
+.marca {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: clamp(1.15rem, 1.05rem + 0.5vw, 1.4rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.marca-icone rect {
+  fill: var(--topo-texto);
+}
+
+.marca-icone path {
+  fill: none;
+  stroke: var(--topo-fundo);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.topo-mes {
+  font-size: 0.9rem;
+  color: var(--topo-suave);
+}
+
+.topo-mes time {
+  color: var(--topo-texto);
+  font-weight: 600;
+}
+
+/* ---------- página ---------- */
 .pagina {
   display: grid;
   gap: var(--espaco);
   width: 100%;
-  max-width: 64rem;
+  max-width: 72rem;
   margin-inline: auto;
   padding: var(--espaco);
 }
 
-/* ---------- resumo ---------- */
+/* superfície de cartão com sombra suave */
+.resumo-item,
+.filtro,
+.cartao,
+.tabela-bloco,
+.item,
+.aviso {
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+}
+
+/* ---------- resumo: empilhado no celular, em linha em telas largas ---------- */
 .resumo {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
+  grid-template-columns: 1fr;
   gap: 0.75rem;
 }
 
 .resumo-item {
-  padding: 0.75rem 1rem;
-  background: var(--superficie);
-  border: 1px solid var(--borda);
-  border-radius: var(--raio);
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.875rem 1rem;
 }
 
 .resumo-item dt {
   color: var(--texto-suave);
   font-size: 0.875rem;
+  font-weight: 600;
 }
 
 .resumo-item dd {
   font-size: clamp(1.15rem, 1rem + 0.75vw, 1.5rem);
   font-weight: 700;
+  text-align: end;
+  line-height: 1.2;
+}
+
+.resumo-destaque {
+  color: var(--sobre-primaria);
+  background: var(--primaria);
+  border-color: var(--primaria);
+}
+
+.resumo-destaque dt {
+  color: var(--sobre-primaria);
+}
+
+.resumo-destaque dd {
+  font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem);
+}
+
+@media (min-width: 40rem) {
+  .resumo {
+    grid-template-columns: 1.4fr 1fr 1fr;
+  }
 }
 
 /* ---------- filtro: campos empilhados no celular ---------- */
@@ -107,9 +294,6 @@ button {
   flex-direction: column;
   gap: 0.75rem;
   padding: 1rem;
-  background: var(--superficie);
-  border: 1px solid var(--borda);
-  border-radius: var(--raio);
 }
 
 .campo {
@@ -126,12 +310,18 @@ button {
 .campo input,
 .campo select {
   width: 100%;
-  min-height: 2.75rem;
+  min-height: var(--alvo);
   padding: 0.5rem 0.75rem;
   color: var(--texto);
   background: var(--superficie);
-  border: 1px solid var(--texto-suave);
-  border-radius: 0.5rem;
+  border: 1px solid var(--borda-forte);
+  border-radius: var(--raio-pequeno);
+  font-variant-numeric: tabular-nums;
+}
+
+.campo input::placeholder {
+  color: var(--texto-suave);
+  opacity: 1;
 }
 
 @media (min-width: 40rem) {
@@ -151,23 +341,26 @@ button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 2.75rem;
-  min-width: 2.75rem;
-  padding: 0.5rem 1rem;
-  color: #fff;
+  gap: 0.375rem;
+  min-height: var(--alvo);
+  min-width: var(--alvo);
+  padding: 0.5rem 1.125rem;
+  color: var(--sobre-primaria);
   font-weight: 600;
-  background: var(--destaque);
-  border: 2px solid var(--destaque);
-  border-radius: 0.5rem;
+  background: var(--primaria);
+  border: 2px solid var(--primaria);
+  border-radius: var(--raio-pequeno);
   cursor: pointer;
 }
 
 .botao-secundario {
-  color: var(--destaque);
+  color: var(--primaria-forte);
   background: var(--superficie);
+  border-color: var(--primaria);
 }
 
 .botao-perigo {
+  color: var(--sobre-perigo);
   background: var(--perigo);
   border-color: var(--perigo);
 }
@@ -177,7 +370,7 @@ button {
   cursor: not-allowed;
 }
 
-/* ---------- lista de cartões: uma coluna no celular ---------- */
+/* ---------- lista de cartões: uma coluna no celular, mais quando couber ---------- */
 .lista-cabecalho {
   display: flex;
   flex-wrap: wrap;
@@ -194,7 +387,7 @@ button {
 
 .cartoes {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
   gap: 0.75rem;
 }
 
@@ -205,24 +398,42 @@ button {
 
 .cartao {
   container-type: inline-size;
-  background: var(--superficie);
-  border: 1px solid var(--borda);
-  border-radius: var(--raio);
+  position: relative;
+  overflow: hidden;
+}
+
+.cartao-alto {
+  border-color: var(--alerta);
+}
+
+.cartao-alto::before {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  inline-size: 4px;
+  background: var(--alerta);
 }
 
 .cartao-link {
   display: grid;
-  gap: 0.25rem;
+  gap: 0.375rem;
   height: 100%;
-  padding: 1rem;
+  min-height: var(--alvo);
+  padding: 1rem 1rem 1rem 1.125rem;
   color: inherit;
   text-decoration: none;
   border-radius: var(--raio);
 }
 
+.cartao-link:focus-visible {
+  outline-offset: -3px;
+}
+
 .cartao-loja {
   font-size: 1.05rem;
-  color: var(--destaque-escuro);
+  color: var(--primaria-forte);
+  line-height: 1.3;
 }
 
 .cartao-info {
@@ -230,20 +441,89 @@ button {
   font-size: 0.9rem;
 }
 
-.cartao-total {
-  font-size: 1.25rem;
-  font-weight: 700;
+.cartao-valor {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
 }
 
+.cartao-total {
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-align: end;
+  white-space: nowrap;
+}
+
+.selo-alto {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.125rem 0.5rem;
+  color: var(--alerta-texto);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: var(--alerta-fundo);
+  border: 1px solid var(--alerta);
+  border-radius: 999px;
+}
+
+.selo-alto svg {
+  fill: currentColor;
+}
+
+.proporcao {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.proporcao-barra {
+  block-size: 0.5rem;
+  background: var(--primaria-suave);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.proporcao-barra span {
+  display: block;
+  block-size: 100%;
+  min-inline-size: 2px;
+  background: var(--primaria);
+  border-radius: inherit;
+}
+
+.cartao-alto .proporcao-barra {
+  background: var(--alerta-fundo);
+}
+
+.cartao-alto .proporcao-barra span {
+  background: var(--alerta);
+}
+
+.proporcao-texto {
+  color: var(--texto-suave);
+  font-size: 0.8rem;
+  text-align: end;
+}
+
+/* o cartão se adapta ao espaço que recebe, não à janela */
 @container (min-width: 22rem) {
   .cartao-link {
     grid-template-columns: 1fr auto;
     align-items: center;
+    column-gap: 1rem;
   }
 
-  .cartao-total {
+  .cartao-valor {
     grid-column: 2;
     grid-row: 1 / span 2;
+  }
+
+  .proporcao {
+    grid-column: 1 / -1;
   }
 }
 
@@ -256,18 +536,16 @@ button {
 
 .tabela-bloco {
   display: grid;
+  align-content: start;
   gap: 0.5rem;
   padding: 1rem;
-  background: var(--superficie);
-  border: 1px solid var(--borda);
-  border-radius: var(--raio);
 }
 
 .linhas li {
   display: flex;
   justify-content: space-between;
   gap: 0.75rem;
-  padding-block: 0.4rem;
+  padding-block: 0.5rem;
   border-bottom: 1px solid var(--borda);
 }
 
@@ -275,20 +553,34 @@ button {
   border-bottom: 0;
 }
 
-.valor {
-  font-weight: 600;
-  white-space: nowrap;
-}
-
 /* ---------- detalhe ---------- */
 .voltar {
   display: inline-flex;
   align-items: center;
   justify-self: start;
-  min-height: 2.75rem;
-  padding-inline: 0.25rem;
-  color: var(--destaque);
+  gap: 0.25rem;
+  min-height: var(--alvo);
+  min-width: var(--alvo);
+  padding: 0.25rem 0.75rem 0.25rem 0.5rem;
+  color: var(--primaria-forte);
   font-weight: 600;
+  text-decoration: none;
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio-pequeno);
+}
+
+.voltar svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.detalhe-cabecalho {
+  display: grid;
+  gap: 0.25rem;
 }
 
 .itens {
@@ -304,12 +596,11 @@ button {
   justify-content: space-between;
   gap: 0.75rem;
   padding: 1rem;
-  background: var(--superficie);
-  border: 1px solid var(--borda);
-  border-radius: var(--raio);
 }
 
 .item-texto {
+  display: grid;
+  gap: 0.25rem;
   flex: 1 1 12rem;
   min-width: 0;
 }
@@ -320,6 +611,7 @@ button {
 
 .item-conta {
   color: var(--texto-suave);
+  text-align: end;
 }
 
 .item-conta strong {
@@ -330,6 +622,14 @@ button {
   flex: 1 1 100%;
 }
 
+@container (min-width: 30rem) {
+  .item-texto {
+    grid-template-columns: 1fr auto;
+    align-items: baseline;
+    column-gap: 1rem;
+  }
+}
+
 @media (min-width: 30rem) {
   .item .botao {
     flex: 0 0 auto;
@@ -337,51 +637,132 @@ button {
 }
 
 .total-pedido {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 1rem;
   font-size: 1.15rem;
   text-align: end;
+  background: var(--primaria-suave);
+  border-radius: var(--raio);
 }
 
-/* ---------- avisos ---------- */
+.total-pedido strong {
+  margin-inline-start: auto;
+  font-size: 1.35rem;
+}
+
+/* ---------- estados: carregando, vazio, erro ---------- */
 .aviso {
   display: grid;
   gap: 0.75rem;
   justify-items: start;
-  padding: 1rem;
+  padding: 1rem 1.125rem;
+}
+
+.aviso-carregando {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--texto-suave);
+}
+
+/* indicador parado por padrão; gira só sem prefers-reduced-motion */
+.aviso-carregando::before {
+  content: '';
+  inline-size: 1.25rem;
+  block-size: 1.25rem;
+  border: 3px solid var(--primaria-suave);
+  border-top-color: var(--primaria);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.aviso-vazio {
+  justify-items: center;
+  padding-block: clamp(1.5rem, 1rem + 3vw, 3rem);
+  color: var(--texto-suave);
+  text-align: center;
+  /* superfície opaca: o texto não fica sobre o padrão do fundo */
   background: var(--superficie);
-  border: 1px solid var(--borda);
-  border-radius: var(--raio);
+  border: 2px dashed var(--borda);
+  box-shadow: none;
+}
+
+.aviso-vazio h1 {
+  color: var(--texto);
+}
+
+.aviso-vazio .voltar {
+  justify-self: center;
 }
 
 .aviso-erro {
-  color: var(--perigo-escuro);
+  color: var(--perigo-forte);
   background: var(--erro-fundo);
   border-color: var(--perigo);
+  border-inline-start-width: 4px;
 }
 
 /* Hover só como bônus, em aparelhos com mouse. */
 @media (hover: hover) and (pointer: fine) {
-  .cartao-link:hover {
-    background: #eef4fb;
+  .cartao:hover {
+    border-color: var(--primaria);
+    box-shadow: var(--sombra-alta);
+  }
+
+  .cartao-alto:hover {
+    border-color: var(--alerta);
   }
 
   .botao:not(:disabled):hover {
-    background: var(--destaque-escuro);
-    border-color: var(--destaque-escuro);
+    background: var(--primaria-forte);
+    border-color: var(--primaria-forte);
   }
 
   .botao-secundario:not(:disabled):hover {
-    color: #fff;
+    color: var(--sobre-primaria);
+    background: var(--primaria);
+    border-color: var(--primaria);
   }
 
   .botao-perigo:not(:disabled):hover {
-    background: var(--perigo-escuro);
-    border-color: var(--perigo-escuro);
+    background: var(--perigo-forte);
+    border-color: var(--perigo-forte);
+  }
+
+  .voltar:hover {
+    background: var(--primaria-suave);
   }
 }
 
+/* Movimento só para quem não pediu menos movimento. */
 @media (prefers-reduced-motion: no-preference) {
-  .cartao-link,
-  .botao {
-    transition: background-color 150ms ease;
+  .cartao,
+  .botao,
+  .voltar {
+    transition:
+      background-color 150ms ease,
+      border-color 150ms ease,
+      box-shadow 150ms ease,
+      transform 150ms ease;
+  }
+
+  .aviso-carregando::before {
+    animation: girar 0.8s linear infinite;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .cartao:hover {
+      transform: translateY(-2px);
+    }
+  }
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
   }
 }

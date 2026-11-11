@@ -1,0 +1,56 @@
+# EV-005 · e2e
+# comando: npm --prefix gastos run e2e -- --remover
+# shell: bash
+# início: 2026-11-10T23:49:45.138Z
+# fim: 2026-11-10T23:49:55.668Z (10.5 s)
+# resultado: regex (\d+ ok, \d+ falhas)
+# código de saída: 0
+
+> gastos@0.0.0 e2e
+> node e2e/conferir.mjs --remover
+
+ok     [REQ-019] cartão do pedido 1 (Mercado Central) mostra R$ 54,40
+ok     [REQ-016] cartão mostra loja, data, número de itens e total
+ok     [REQ-022] resumo do topo coerente com a lista (total, quantidade, maior)
+ok     [REQ-031] campos vazios mostram todos os pedidos do servidor
+ok     [REQ-068] cabeçalho "Finanças" com o mês de referência e título da aba
+ok     [REQ-069] tokens de cor em :root e texto com contraste >= 4.5:1 no tema claro
+ok     [REQ-071] valores com tabular-nums e alinhados à direita (cartões, resumo, tabelas)
+ok     [REQ-072][REQ-076] 1280 px: resumo em linha com o total em destaque, cartões em 2+ colunas, filtro em linha
+ok     [REQ-073] pedido acima de R$ 300 tem a marca "alto"; os demais não
+ok     [REQ-074] barra de proporção com texto "N% do total exibido" coerente com o total
+ok     [REQ-078] filtro sem resultado tem visual próprio de vazio e mantém o texto
+ok     [REQ-028] mínimo 100 mostra só pedidos >= R$ 100
+ok     [REQ-032] resumo muda junto com o filtro (total, quantidade e maior dos filtrados)
+ok     [REQ-026][REQ-029] mínimo vazio e máximo 50 aplicam só o máximo
+ok     [REQ-030] mínimo e máximo juntos
+ok     [REQ-027][REQ-053] faixa sem resultado mostra a mensagem e Limpar volta tudo
+ok     [REQ-065] ordenar por valor (maior e menor primeiro) e voltar à ordem original
+ok     [REQ-066][REQ-067] total por loja e gasto por data agrupam os cartões
+ok     [REQ-034][REQ-038] clicar no cartão abre /pedido/1 sem recarregar
+ok     [REQ-043] detalhe de pedido que está na lista lê do Context, sem GET /pedidos/1
+ok     [REQ-036] detalhe mostra itens com subtotal e total R$ 54,40
+ok     [REQ-039] F5 no detalhe continua mostrando o pedido
+ok     [REQ-037][REQ-040] Voltar leva a /
+ok     [REQ-041] /pedido/999 faz GET /pedidos/999 com 404 e mostra "Pedido não encontrado" com link de volta
+ok     [REQ-042] /xyz mostra "Página não encontrada"
+ok     [REQ-045][REQ-052] servidor recusando o DELETE: mensagem na tela e item continua
+ok     [REQ-054] rede lenta mostra "Carregando…" e depois a lista
+ok     [REQ-055][REQ-057] servidor fora: mensagem de erro e Tentar de novo traz a lista
+ok     [REQ-056] 404 e 500 do servidor: a mensagem cita o status
+ok     [REQ-059] lista vazia mostra "Nenhum pedido neste mês"
+ok     [REQ-029] filtro compara em centavos: 1,10 × 3 aparece com máximo 3,30
+ok     [REQ-078] carregando, erro e lista vazia com visual próprio e os textos da F-001
+ok     [REQ-060][REQ-061][REQ-062] 375 px: sem rolagem lateral, cartões e filtro empilhados
+ok     [REQ-060][REQ-063] 375 px no detalhe: sem rolagem e Remover com 44 px ou mais
+ok     [REQ-072] 375 px: cartões do resumo empilhados
+ok     [REQ-077] 375 px: Limpar, cartões, Voltar e Remover com 44 px ou mais; nenhum alvo < 24 px
+ok     [REQ-071] detalhe: subtotais e total com tabular-nums, alinhados à direita
+ok     [REQ-075] sem rolagem lateral em 320, 360, 375, 768 e 1280 px (/, /pedido/1, /pedido/999)
+ok     [REQ-079] foco visível (contorno) em campos, botões e links navegando com Tab
+ok     [REQ-070] tema escuro (prefers-color-scheme: dark): fundo do body muda e o contraste continua >= 4.5:1
+ok     [REQ-080] transições só sem prefers-reduced-motion e :hover só dentro de (hover: hover) and (pointer: fine)
+ok     [REQ-080] 360 px com toque: chega ao detalhe e ao Remover só com toques
+ok     [REQ-048][REQ-049][REQ-050] remover item atualiza totais, persiste no F5 e pedido vazio some
+ok     [REQ-064] console sem erro nem aviso de key
+44 ok, 0 falhas
