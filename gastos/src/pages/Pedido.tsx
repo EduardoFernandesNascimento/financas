@@ -76,6 +76,9 @@ export default function Pedido() {
 
   const voltar = (
     <Link to="/" className="voltar">
+      <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false">
+        <path d="M10 3L5 8l5 5" />
+      </svg>
       Voltar
     </Link>
   )
@@ -84,7 +87,7 @@ export default function Pedido() {
     return (
       <main className="pagina">
         {voltar}
-        <p className="aviso" role="status">Carregando…</p>
+        <p className="aviso aviso-carregando" role="status">Carregando…</p>
       </main>
     )
   }
@@ -107,7 +110,7 @@ export default function Pedido() {
     return (
       <main className="pagina">
         {voltar}
-        <p className="aviso" role="status">Carregando…</p>
+        <p className="aviso aviso-carregando" role="status">Carregando…</p>
       </main>
     )
   }
@@ -129,8 +132,10 @@ export default function Pedido() {
   if (!pedido) {
     return (
       <main className="pagina">
-        <h1>Pedido não encontrado</h1>
-        {voltar}
+        <div className="aviso aviso-vazio">
+          <h1>Pedido não encontrado</h1>
+          {voltar}
+        </div>
       </main>
     )
   }
@@ -138,10 +143,12 @@ export default function Pedido() {
   return (
     <main className="pagina">
       {voltar}
-      <h1>{pedido.loja}</h1>
-      <p className="cartao-info">
-        <time dateTime={pedido.data}>{dataBR(pedido.data)}</time>
-      </p>
+      <div className="detalhe-cabecalho">
+        <h1>{pedido.loja}</h1>
+        <p className="cartao-info">
+          <time dateTime={pedido.data}>{dataBR(pedido.data)}</time>
+        </p>
+      </div>
 
       {erroRemover && (
         <p className="aviso aviso-erro" role="alert">
@@ -156,7 +163,7 @@ export default function Pedido() {
               <h2 className="item-titulo">{item.titulo}</h2>
               <p className="item-conta">
                 {dinheiro(item.preco)} × {item.quantidade} ={' '}
-                <strong>{dinheiro(subtotal(item))}</strong>
+                <strong className="valor">{dinheiro(subtotal(item))}</strong>
               </p>
             </div>
             <button
@@ -173,7 +180,7 @@ export default function Pedido() {
       </ul>
 
       <p className="total-pedido">
-        Total do pedido: <strong>{dinheiro(totalPedido(pedido))}</strong>
+        <span>Total do pedido:</span> <strong className="valor">{dinheiro(totalPedido(pedido))}</strong>
       </p>
     </main>
   )

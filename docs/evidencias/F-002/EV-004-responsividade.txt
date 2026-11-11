@@ -1,0 +1,14 @@
+# EV-004 · responsividade
+# comando: node .opencode/scripts/conferir-responsividade.mjs http://localhost:5173/pedido/1 --prints .opencode/estado/F-002/prints/pedido-1
+# shell: bash
+# início: 2026-11-10T23:49:35.559Z
+# fim: 2026-11-10T23:49:38.884Z (3.3 s)
+# resultado: regex (\d+ falha\(s\), \d+ aviso\(s\))
+# código de saída: 0
+Responsividade · http://localhost:5173/pedido/1 · larguras 320, 360, 768, 1280
+- 320 px · ok · scrollWidth 320 / largura 320
+- 360 px · ok · scrollWidth 360 / largura 360
+- 768 px · ok · scrollWidth 768 / largura 768
+- 1280 px · ok · scrollWidth 1280 / largura 1280
+prints em .opencode/estado/F-002/prints/pedido-1
+0 falha(s), 0 aviso(s)

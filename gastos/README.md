@@ -6,8 +6,8 @@ Também tem os extras: ordenar por valor, total por loja e gasto por data.
 
 ## Dupla
 
-- Nome completo 1
-- Nome completo 2
+- Eduardo Fernandes
+- Carlos Wagner
 
 ## Tecnologia
 
@@ -29,7 +29,7 @@ Para voltar os dados ao início: pare o servidor (Ctrl+C) e rode `npm run reset`
 
 ### 2. App
 
-Crie o arquivo `.env` ao lado do `package.json` (pode copiar o `.env.example`):
+Crie o arquivo `gastos/.env` (ao lado do `package.json`) com esta linha:
 
 ```
 VITE_API_URL=http://localhost:3334

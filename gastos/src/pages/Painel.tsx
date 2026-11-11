@@ -22,7 +22,7 @@ export default function Painel() {
     return (
       <main className="pagina">
         <h1>Painel de gastos do mês</h1>
-        <p className="aviso" role="status">Carregando…</p>
+        <p className="aviso aviso-carregando" role="status">Carregando…</p>
       </main>
     )
   }
@@ -45,7 +45,7 @@ export default function Painel() {
     return (
       <main className="pagina">
         <h1>Painel de gastos do mês</h1>
-        <p className="aviso">Nenhum pedido neste mês</p>
+        <p className="aviso aviso-vazio">Nenhum pedido neste mês</p>
       </main>
     )
   }
@@ -58,6 +58,7 @@ export default function Painel() {
       : [...filtrados].sort((a, b) =>
           ordem === 'maior' ? totalPedido(b) - totalPedido(a) : totalPedido(a) - totalPedido(b),
         )
+  const totalExibido = totalMes(filtrados)
   const maior = filtrados.reduce((m, pedido) => Math.max(m, totalPedido(pedido)), 0)
   const porLoja = Object.entries(totalPorLoja(filtrados)).sort((a, b) => b[1] - a[1])
   const porData = Object.entries(gastoPorData(filtrados)).sort((a, b) => a[0].localeCompare(b[0]))
@@ -68,9 +69,9 @@ export default function Painel() {
 
       <section aria-label="Resumo do mês">
         <dl className="resumo">
-          <div className="resumo-item">
+          <div className="resumo-item resumo-destaque">
             <dt>Total do mês</dt>
-            <dd>{dinheiro(totalMes(filtrados))}</dd>
+            <dd>{dinheiro(totalExibido)}</dd>
           </div>
           <div className="resumo-item">
             <dt>Pedidos</dt>
@@ -99,12 +100,12 @@ export default function Painel() {
         </div>
 
         {lista.length === 0 ? (
-          <p className="aviso">Nenhum pedido nessa faixa</p>
+          <p className="aviso aviso-vazio">Nenhum pedido nessa faixa</p>
         ) : (
           <ul className="cartoes">
             {lista.map((pedido) => (
               <li key={pedido.id}>
-                <PedidoCard pedido={pedido} />
+                <PedidoCard pedido={pedido} proporcao={totalExibido > 0 ? totalPedido(pedido) / totalExibido : 0} />
               </li>
             ))}
           </ul>

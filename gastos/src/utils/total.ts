@@ -10,7 +10,7 @@ export const totalMes = (pedidos: Pedido[]) =>
   pedidos.reduce((soma, pedido) => soma + totalPedido(pedido), 0)
 
 // Centavos inteiros: 1.1 × 3 dá 3.3000000000000003 em ponto flutuante, mas na tela é R$ 3,30.
-const centavos = (valor: number) => Math.round(valor * 100)
+export const centavos = (valor: number) => Math.round(valor * 100)
 
 // Faixa de valor: texto vazio é "sem limite". A comparação é em centavos, o mesmo valor que a tela mostra.
 export function dentroDaFaixa(pedido: Pedido, minimo: string, maximo: string) {
